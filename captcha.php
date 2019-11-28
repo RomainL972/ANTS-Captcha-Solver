@@ -46,7 +46,7 @@ $active = explode('<div class="path-item-label">', explode("path-item-active", $
 $active = trim(html_entity_decode(explode("</div>", $active)[0], ENT_QUOTES)) . "\n";
 echo $active;
 
-curl_setopt($ch, CURLOPT_URL, "https://smsapi.free-mobile.fr/sendmsg?user=" . getenv("SMS_USER") . "&pass=" . getenv("SMS_PASS") . "&msg=Salut");
+curl_setopt($ch, CURLOPT_URL, "https://smsapi.free-mobile.fr/sendmsg?user=" . getenv("SMS_USER") . "&pass=" . getenv("SMS_PASS") . "&msg=" . urlencode($active));
 curl_setopt($ch, CURLOPT_POST, false);
 curl_exec($ch);
 curl_close($ch);
