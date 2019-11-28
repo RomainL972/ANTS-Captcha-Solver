@@ -35,7 +35,6 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, "suivipasseport[numpasseport]=" . getenv("NUMERO_DEMANDE") . "&captcha_code=" . $answer);
 
 $html = curl_exec($ch);
-curl_close($ch);
 
 if(strpos($html, "Le captcha n'est pas valide")) {
     echo "failed\n";
@@ -46,6 +45,11 @@ $intersting = explode("Retrouvez <span>nous sur</span>", explode("Suivi du titre
 $active = explode('<div class="path-item-label">', explode("path-item-active", $intersting)[1])[1];
 $active = trim(html_entity_decode(explode("</div>", $active)[0], ENT_QUOTES)) . "\n";
 echo $active;
+
+curl_setopt($ch, CURLOPT_URL, "https://smsapi.free-mobile.fr/sendmsg?user=" . getenv("SMS_USER") . "&pass=" . getenv("SMS_PASS") . "&msg=Salut");
+curl_setopt($ch, CURLOPT_POST, false);
+curl_exec($ch);
+curl_close($ch);
 
 $frontend = fopen("index.html", "w");
 fwrite($frontend, "<!doctype html><html><head><title>ANTS Check page</title><meta charset='utf-8'></head><body><p>" . $active . "</p><p>Dernière mise à jour : " . date("d/m/Y H:i:s") ."</body></html>");
