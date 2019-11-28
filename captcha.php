@@ -46,3 +46,7 @@ $intersting = explode("Retrouvez <span>nous sur</span>", explode("Suivi du titre
 $active = explode('<div class="path-item-label">', explode("path-item-active", $intersting)[1])[1];
 $active = trim(html_entity_decode(explode("</div>", $active)[0], ENT_QUOTES)) . "\n";
 echo $active;
+
+$frontend = fopen("index.html", "w");
+fwrite($frontend, "<!doctype html><html><head><title>ANTS Check page</title></head><body><p>" . $active . "</p></body></html>");
+fclose($frontend);
