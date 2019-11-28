@@ -48,5 +48,5 @@ $active = trim(html_entity_decode(explode("</div>", $active)[0], ENT_QUOTES)) . 
 echo $active;
 
 $frontend = fopen("index.html", "w");
-fwrite($frontend, "<!doctype html><html><head><title>ANTS Check page</title></head><body><p>" . $active . "</p><p>Last update : " . date("d/m/Y H:i:s") ."</body></html>");
+fwrite($frontend, "<!doctype html><html><head><title>ANTS Check page</title></head><body><p>" . $active . "</p><p>Dernière mise à jour : " . date("d/m/Y H:i:s") ."</body></html>");
 fclose($frontend);
